@@ -1,0 +1,20 @@
+{
+  "name": "restful-api",
+  "version": "1.0.0",
+  "description": "build a restful api application with node",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "restapi",
+    "mongoose"
+  ],
+  "author": "ntduy96",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
