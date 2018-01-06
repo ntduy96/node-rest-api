@@ -1,8 +1,11 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 
-app.get('/', (req, res) => {
-  res.json({ message: 'It works!' });
-});
+const products = require("./routes/api/products");
+const orders = require("./routes/api/orders");
+
+app
+  .use("/products", products)
+  .use("/orders", orders);
 
 module.exports = app;
