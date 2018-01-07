@@ -30,10 +30,20 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:productId', (req, res) => {
-  res.status(200).json({
-    message: 'Handling GET request to /products/' + req.params.productId,
-    productId: req.params.productId
-  });
+  Product.findById(req.params.productId)
+    .then(product => {
+      if (product) {
+        res.status(200).json(product);
+      } else {
+        res.status(404).json({
+          message: 'Not found valid entry for provided ID'
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
 });
 
 router.patch('/:productId', (req, res) => {
