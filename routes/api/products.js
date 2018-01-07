@@ -20,13 +20,17 @@ router.post('/', (req, res) => {
   product.save()
     .then(result => {
       console.log(result);
+      res.status(201).json({
+        message: 'Handling POST request to /products',
+        productCreated: result
+      });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
 
-  res.status(201).json({
-    message: 'Handling POST request to /products',
-    productCreated: product
-  });
+  
 });
 
 router.get('/:productId', (req, res) => {
