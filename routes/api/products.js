@@ -5,9 +5,14 @@ const mongoose = require('mongoose');
 const Product = require('../../models/product');
 
 router.get('/', (req, res) => {
-  res.status(200).json({
-    message: 'Handling GET request to /products'
-  });
+  Product.find()
+    .then(products => {
+      res.status(200).json(products);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
 });
 
 router.post('/', (req, res) => {
