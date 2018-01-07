@@ -11,6 +11,25 @@ app
   .use(bodyParser.urlencoded({ extended: false }))
   .use(bodyParser.json());
 
+/**
+ * Handling Cross-Origin Resource Sharing (CORS) error
+ */
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Header',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
+  if (res.method === 'OPTIONS') {
+    res.header(
+      'Access-Control-Allow-Method',
+      'GET, POST, PUT, PATCH, DELETE'
+    );
+    return res.status(200).json({});
+  }
+  next();
+});
+
 app
   .use("/products", products)
   .use("/orders", orders);
