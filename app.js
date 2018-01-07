@@ -12,6 +12,11 @@ app
   .use(bodyParser.json());
 
 /**
+ * Open connection to Mongo Atlas database
+ */
+require('./db');
+
+/**
  * Handling Cross-Origin Resource Sharing (CORS) error
  */
 app.use((req, res, next) => {
