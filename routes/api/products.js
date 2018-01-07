@@ -63,10 +63,21 @@ router.patch('/:productId', (req, res) => {
 });
 
 router.delete('/:productId', (req, res) => {
-  res.status(200).json({
-    message: 'Deleted product!',
-    productId: req.params.productId
-  });
+  Product.findByIdAndRemove({ _id: req.params.productId })
+    .exec()
+    .then(result => {
+      if (result) {
+        res.status(200).json(result);
+      } else {
+        res.status(404).json({
+          message: 'Not found valid entry for provided ID to delete'
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
 });
 
 module.exports = router;
