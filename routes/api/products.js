@@ -56,10 +56,21 @@ router.get('/:productId', (req, res) => {
 });
 
 router.patch('/:productId', (req, res) => {
-  res.status(201).json({
-    message: 'Updated product!',
-    productId: req.params.productId
-  });
+  Product.findByIdAndUpdate(
+    req.params.productId, { $set: req.body })
+    .then(result => {
+      if (result) {
+        res.status(200).json(result);
+      } else {
+        res.status(404).json({
+          message: 'Not found valid entry for provided ID'
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
 });
 
 router.delete('/:productId', (req, res) => {
