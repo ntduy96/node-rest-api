@@ -74,13 +74,22 @@ router.patch('/:productId', (req, res) => {
 });
 
 router.delete('/:productId', (req, res) => {
+<<<<<<< HEAD
   Product.findByIdAndRemove(req.params.productId)
+=======
+  Product.findByIdAndRemove({ _id: req.params.productId })
+    .exec()
+>>>>>>> f7c2f5423c58245249930d7e30fa47e1afabfbe0
     .then(result => {
       if (result) {
         res.status(200).json(result);
       } else {
         res.status(404).json({
+<<<<<<< HEAD
           message: 'Not found valid entry for provided ID'
+=======
+          message: 'Not found valid entry for provided ID to delete'
+>>>>>>> f7c2f5423c58245249930d7e30fa47e1afabfbe0
         });
       }
     })
