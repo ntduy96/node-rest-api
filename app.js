@@ -30,6 +30,11 @@ app.use((req, res, next) => {
   next();
 });
 
+/**
+ * Open MySQL database connection
+ */
+require('./connection');
+
 app
   .use("/products", products)
   .use("/orders", orders);
